@@ -12,6 +12,12 @@ dodgers$ordered_day_of_week <- with(data=dodgers,
                                                             ifelse ((day_of_week == "Thursday"),4,
                                                                     ifelse ((day_of_week == "Friday"),5,
                                                                             ifelse ((day_of_week == "Saturday"),6,7)))))))
+#data.table的用法
+head(df[,AgeDiscret := as.factor(round(Age/10,0))])               #:= 新增加一列
+head(df[,AgeCat:= as.factor(ifelse(Age > 30, "Old", "Young"))])   #ifelse
+df[,ID:=NULL]      
+
+
 dodgers$ordered_day_of_week <- factor(dodgers$ordered_day_of_week, levels=1:7,
                                       labels=c("Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"))
 head(dodgers)
